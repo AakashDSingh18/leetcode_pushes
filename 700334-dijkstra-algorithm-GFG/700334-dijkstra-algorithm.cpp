@@ -15,6 +15,7 @@ class Solution {
                 int curr= q.top().second;
                 int wt= q.top().first;
                 q.pop();
+                if(wt > shortest[curr]) continue;
                 for(int i=0; i<graph[curr].size(); i++){
                     if(wt+graph[curr][i].second < shortest[graph[curr][i].first]){
                         shortest[graph[curr][i].first]= wt+graph[curr][i].second;
