@@ -25,8 +25,8 @@ public:
         vector<int> parent(n);
         iota(parent.begin(), parent.end(), 0);
         for(int i= 0; i<n; i++) {
-        for(int j= i+1; j<n; j++) {
-            if(stones[i][0]== stones[j][0]||stones[i][1]== stones[j][1]){
+            for(int j= i+1; j<n; j++) {
+                if(stones[i][0]== stones[j][0]||stones[i][1]== stones[j][1]){
                     unionbysize(size, parent, i, j);
                 }
             }
