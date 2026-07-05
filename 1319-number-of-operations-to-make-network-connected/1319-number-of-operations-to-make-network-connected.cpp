@@ -2,7 +2,7 @@ class Solution {
 public:
     int findup(vector<int>& parent, int num){
         if(num==parent[num]) return num;
-        return findup(parent, parent[num]);
+        return parent[num]= findup(parent, parent[num]);
     }
     void unionbysize(vector<int>& size, vector<int>& parent, int num1, int num2){
         int u_id= findup(parent, num1);
