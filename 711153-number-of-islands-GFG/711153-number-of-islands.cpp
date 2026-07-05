@@ -47,15 +47,9 @@ class Solution {
                     }
                 }
             }
-            // unordered_map<int, int> freq;
-            // for(int j=0; j<=i; j++){
-            //     freq[findup(parent, j)]++;
-            // }
-            // curr= freq.size();
             ans.push_back(curr);
         }
         return ans;
-        
     }
 };
 
