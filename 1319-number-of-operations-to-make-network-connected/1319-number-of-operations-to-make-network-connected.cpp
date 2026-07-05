@@ -1,34 +1,34 @@
 class Solution {
 public:
+    int findup(vector<int>& parent, int num){
+        if(num==parent[num]) return num;
+        return findup(parent, parent[num]);
+    }
+    void unionbysize(vector<int>& size, vector<int>& parent, int num1, int num2){
+        int u_id= findup(parent, num1);
+        int v_id= findup(parent, num2);
+        if(size[u_id] < size[v_id]){
+            parent[u_id]= v_id;
+            size[v_id]+= size[u_id];
+        }else if(size[u_id] > size[v_id]){
+            parent[v_id]= u_id;
+            size[u_id]+= size[v_id];
+        }else{
+            parent[v_id]= u_id;
+            size[u_id]++;
+        }
+    }
     int makeConnected(int n, vector<vector<int>>& connections) {
         int m= connections.size();
         if (m < n-1) return -1;
-        vector<int> rank(n, 0);
+        vector<int> size(n, 1);
         vector<int> parent(n);
         iota(parent.begin(), parent.end(), 0);
         for(int i=0; i<m; i++){
-            int u_id = parent[connections[i][0]];
-            int v_id = parent[connections[i][1]];
-            if(u_id == v_id) continue;
-            if(rank[u_id] < rank[v_id]){
-                for(int j=0; j<n; j++){
-                    if(parent[j]==u_id) parent[j]= v_id;
-                }
-            }else if(rank[u_id] > rank[v_id]){
-                for(int j=0; j<n; j++){
-                    if(parent[j]==v_id) parent[j]= u_id;
-                }
-            }else{
-                rank[u_id]++;
-                for(int j=0; j<n; j++){
-                    if(parent[j]==v_id) parent[j]= u_id;
-                }
-            }
+            unionbysize(size, parent, connections[i][0], connections[i][1]);
         }
         unordered_map<int, int> freq;
-        for(int i=0; i<n; i++){
-            freq[parent[i]]++;
-        }
+        for(int i=0; i<n; i++) freq[findup(parent, i)]++;
         return freq.size()-1;
     }
 };
