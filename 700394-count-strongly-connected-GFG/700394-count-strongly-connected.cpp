@@ -7,28 +7,33 @@ class Solution {
                 dfs(finish, visited, graph, graph[node][i]);
             }
         }
+        // add only if the dfs iteration of the node is done
         finish.push(node);
     }
     int kosaraju(int V, vector<vector<int>> &edges) {
         vector<vector<int>> graph(V, vector<int>());
         int n= edges.size();
         vector<int> visited(V, 0);
+        // Building Graph
         for(int i=0; i<n; i++){
             graph[edges[i][0]].push_back(edges[i][1]);
         }
-        stack<int> finish;
+        stack<int> finish;  //to stack elements based on finish time
+        // dfs call 1st, to get node in finish time order
         for (int i = 0; i < V; i++) {
             if (!visited[i]) {
                 dfs(finish, visited, graph, i);
             }
         }
+        // Building the Reverse Graph
         vector<vector<int>> graphnew(V, vector<int>());
         for(int i=0; i<n; i++){
             graphnew[edges[i][1]].push_back(edges[i][0]);
         }
         vector<int> newvisited(V, 0);
         stack<int> finishnew;
-        int ans =0;
+        int ans =0;   // to count SCC
+        // dfs cycle 2nd, to actually count SCC in reversed graph
         while(!finish.empty()){
             int curr= finish.top();
             finish.pop();
