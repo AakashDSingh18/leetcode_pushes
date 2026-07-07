@@ -3,13 +3,25 @@ class Solution {
     int minCost(vector<int>& height) {
         // Tabulated method of DP
         int n= height.size();
-        vector<int> dp(n, -1);
-        dp[0]=0;
-        dp[1]=abs(height[1]-height[0]);
+        // vector<int> dp(n, -1);
+        // dp[0]=0;
+        // dp[1]=abs(height[1]-height[0]);
+        // for(int i=2; i<n; i++){
+        //     dp[i]= min(dp[i-1]+abs(height[i]-height[i-1]), dp[i-2]+abs(height[i]-height[i-2]));
+        // }
+        // return dp[n-1];
+        
+        int a=0;
+        if(n<=1) return 0;
+        int b=abs(height[1]-height[0]);
+        if(n==2) return b;
+        int curr;
         for(int i=2; i<n; i++){
-            dp[i]= min(dp[i-1]+abs(height[i]-height[i-1]), dp[i-2]+abs(height[i]-height[i-2]));
+            curr= min(b+abs(height[i]-height[i-1]), a+abs(height[i]-height[i-2]));
+            a= b;
+            b= curr;
         }
-        return dp[n-1];
+        return curr;
     }
 };
 
