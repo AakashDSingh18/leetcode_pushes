@@ -2,6 +2,7 @@ class Solution {
   public:
     int minCost(vector<int>& height) {
         // Tabulated method of DP
+        
         int n= height.size();
         // vector<int> dp(n, -1);
         // dp[0]=0;
@@ -11,6 +12,7 @@ class Solution {
         // }
         // return dp[n-1];
         
+        // Space Optimised code for Tabulated form.
         int a=0;
         if(n<=1) return 0;
         int b=abs(height[1]-height[0]);
