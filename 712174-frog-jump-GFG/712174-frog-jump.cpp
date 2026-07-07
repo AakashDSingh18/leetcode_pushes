@@ -1,6 +1,7 @@
 class Solution {
   public:
     int minCost(vector<int>& height) {
+        // Tabulated method of DP
         int n= height.size();
         vector<int> dp(n, -1);
         dp[0]=0;
