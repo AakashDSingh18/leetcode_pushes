@@ -11,23 +11,10 @@ class Solution {
         int n= mat.size();
         vector<vector<int>> dp(n, vector<int>(3, -1));
         int ans= INT_MIN;
-        int last= 3;
-        for(int r=0; r<n; r++){
-            for(int c=0; c<3; c++){
-                // if(c!=last){
-                    if(r==0) dp[r][c]= mat[r][c];
-                    else if(dp[r][c]!=-1) return dp[r][c];
-                    else {
-                        int left= dp[r-1][(c+1)%3];
-                        int right= dp[r-1][(c+2)%3];
-                        dp[r][c]= max(left, right)+mat[r][c];
-                    }
-                // }
-                // ans= max(ans, func(n-1, i, dp, mat, n));
-            }
+        for(int i=0; i<3; i++){
+            ans= max(ans, func(n-1, i, dp, mat, n));
         }
-        // return ans;
-        return max(dp[n-1][0], max(dp[n-1][1], dp[n-1][2]));
+        return ans;
     }
 };
 
