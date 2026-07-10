@@ -10,9 +10,7 @@ public:
                 if(s[i-1]==s2[j-1]){
                     dp[i][j]= 1+ dp[i-1][j-1];
                 }else{
-                    int skip1= dp[i][j-1];
-                    int skip2= dp[i-1][j];
-                    dp[i][j]= max(skip1, skip2);
+                    dp[i][j]= max(dp[i][j-1], dp[i-1][j]);
                 }
             }
         }
